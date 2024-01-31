@@ -9,10 +9,6 @@
   "author": "Joe Carlson",
   "license": "ISC",
   "devDependencies": {
-    "@types/chai": "^4.3.11",
-    "@types/mocha": "^10.0.6",
-    "chai": "^3.4.1",
-    "mocha": "^2.3.4",
     "typescript": "^5.3.3"
   }
 }
