@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
     "module": "None",
     "target": "ESNext",
     // "isolatedModules": true,

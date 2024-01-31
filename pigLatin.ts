@@ -1,9 +1,9 @@
 /**
  * Takes an sentence and converts each word into pig latin
- * @param  {string} phrase Phrase that will be converted into pig latin.
- * @return {string} Phrase that has been translated into pig latin
+ * @param  phrase Phrase that will be converted into pig latin.
+ * @return Phrase that has been translated into pig latin
  */
-export function pigPhrase (phrase) {
+export function pigPhrase (phrase: string): string {
   var sentence = phrase.split(' ');
   var piggedPhrase = [];
 
@@ -15,10 +15,10 @@ export function pigPhrase (phrase) {
 
 /**
  * converts a pig latin phrase back into it's native language
- * @param  {string} phrase Pig Latin phrase that will be converted back into the native language.
- * @return {string} Phrase that has been translated into the native language.
+ * @param  phrase Pig Latin phrase that will be converted back into the native language.
+ * @return Phrase that has been translated into the native language.
  */
-export function unpigPhrase (phrase) {
+export function unpigPhrase (phrase: string): string {
   var sentence = phrase.split(' ');
   var unpiggedPhrase = [];
 
@@ -30,29 +30,29 @@ export function unpigPhrase (phrase) {
 
 /**
  * Takes a word and converts it into pig latin
- * @param  {string} word This is the word that will be converted
- * @return {string} Word that hass been converted into pig latin
+ * @param  word This is the word that will be converted
+ * @return Word that hass been converted into pig latin
  */
-function pigWord (word) {
+function pigWord (word: string): string {
   return word.slice(findFirstVowel(word), word.length) + '-' + word.slice( -word.length, findFirstVowel(word)) + 'ay';
 }
 
 /**
  * Takes a word in pig latin and converts it into a human readable word
- * @param  {string} piggedWord Word that will be translated
- * @return {string} Translated word
+ * @param  piggedWord Word that will be translated
+ * @return Translated word
  */
-function unpigWord ( piggedWord ) {
+function unpigWord ( piggedWord: string ): string {
   return piggedWord.slice( piggedWord.search('-') + 1, -2 ) + piggedWord.slice( 0, piggedWord.search('-'));
 }
 
 /**
  * Finds the first vowel in a word
- * @param  {string} word
- * @return {number} position of the first vowel in the word
+ * @param  word
+ * @return position of the first vowel in the word
  */
 
-function findFirstVowel (word) {
+function findFirstVowel (word: string): number {
   var vowels = ['a', 'e', 'i', 'o', 'u'];
 
   for (var i = 0; i <= word.length - 1; i++) {

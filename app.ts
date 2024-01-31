@@ -1,7 +1,7 @@
-async function submitPigPhrase() {
+async function submitPigPhrase(): Promise<void> {
 
-  var input = /** @type {HTMLTextAreaElement} */ (document.getElementById('pigInput')).value;
-  var translation = /** @type {HTMLDivElement} */ (document.getElementById('translation'));
+  var input = (document.getElementById('pigInput') as HTMLTextAreaElement).value;
+  var translation = (document.getElementById('translation') as HTMLDivElement);
 
   var header = document.createElement('h3');
   var text = document.createElement('p');
