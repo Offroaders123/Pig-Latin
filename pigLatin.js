@@ -1,28 +1,9 @@
-// module.exports = pigPhrase;
-// module.exports = unpigPhrase;
-
-function submitPigPhrase() {
-
-  var input = /** @type {HTMLTextAreaElement} */ (document.getElementById('pigInput')).value;
-  var translation = /** @type {HTMLDivElement} */ (document.getElementById('translation'));
-
-  var header = document.createElement('h3');
-  var text = document.createElement('p');
-
-  //clear previous translation from the DOM
-  if (translation.firstChild) translation.removeChild(translation.firstChild)
-
-  //Append newly translated phrase to the DOM
-  text.innerHTML = pigPhrase(input);
-  translation.appendChild(text);
-}
-
 /**
  * Takes an sentence and converts each word into pig latin
  * @param  {string} phrase Phrase that will be converted into pig latin.
  * @return {string} Phrase that has been translated into pig latin
  */
-function pigPhrase (phrase) {
+export function pigPhrase (phrase) {
   var sentence = phrase.split(' ');
   var piggedPhrase = [];
 
@@ -37,7 +18,7 @@ function pigPhrase (phrase) {
  * @param  {string} phrase Pig Latin phrase that will be converted back into the native language.
  * @return {string} Phrase that has been translated into the native language.
  */
-function unpigPhrase (phrase) {
+export function unpigPhrase (phrase) {
   var sentence = phrase.split(' ');
   var unpiggedPhrase = [];
 
