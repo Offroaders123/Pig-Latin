@@ -1,7 +1,9 @@
-async function submitPigPhrase(): Promise<void> {
+import { pigPhrase } from "./pigLatin.js";
 
-  const input = document.querySelector<HTMLTextAreaElement>('#pigInput')!.value;
-  const translation = document.querySelector<HTMLDivElement>('#translation')!;
+const input = document.querySelector<HTMLTextAreaElement>('#pigInput')!.value;
+const translation = document.querySelector<HTMLDivElement>('#translation')!;
+
+export function submitPigPhrase(): void {
 
   // const header = document.createElement('h3');
   const text = document.createElement('p');
@@ -10,6 +12,14 @@ async function submitPigPhrase(): Promise<void> {
   translation.firstChild?.remove()
 
   //Append newly translated phrase to the DOM
-  text.innerHTML = (await import("./pigLatin.js")).pigPhrase(input);
+  text.append(pigPhrase(input));
   translation.append(text);
+}
+
+window.submitPigPhrase = submitPigPhrase;
+
+declare global {
+  interface Window {
+    submitPigPhrase: typeof submitPigPhrase;
+  }
 }
