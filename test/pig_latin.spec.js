@@ -2,6 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 chai.should();
 
+// @ts-expect-error - module resolution
 var pigLatin = require('./../pigLatin.js');
 
 describe('Pig Latin', function () {
