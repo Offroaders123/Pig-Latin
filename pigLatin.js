@@ -1,16 +1,18 @@
+// @ts-check
+
 // module.exports = pigPhrase;
 // module.exports = unpigPhrase;
 
 function submitPigPhrase() {
 
-  var input = document.getElementById('pigInput').value;
-  var translation = document.getElementById('translation');
+  var input = /** @type {HTMLTextAreaElement} */ (document.getElementById('pigInput')).value;
+  var translation = /** @type {HTMLDivElement} */ (document.getElementById('translation'));
 
   var header = document.createElement('h3');
   var text = document.createElement('p');
 
   //clear previous translation from the DOM
-  translation.removeChild(translation.firstChild)
+  if (translation.firstChild) translation.removeChild(translation.firstChild)
 
   //Append newly translated phrase to the DOM
   text.innerHTML = pigPhrase(input);
@@ -19,8 +21,8 @@ function submitPigPhrase() {
 
 /**
  * Takes an sentence and converts each word into pig latin
- * @param  [String] phrase that will be converted into pig latin.
- * @return [String] Phrase that has been translated into pig latin
+ * @param  {string} phrase Phrase that will be converted into pig latin.
+ * @return {string} Phrase that has been translated into pig latin
  */
 function pigPhrase (phrase) {
   var sentence = phrase.split(' ');
@@ -34,8 +36,8 @@ function pigPhrase (phrase) {
 
 /**
  * converts a pig latin phrase back into it's native language
- * @param  [String] Pig Latin phrase that will be converted back into the native language.
- * @return [String] Phrase that has been translated into the native language.
+ * @param  {string} phrase Pig Latin phrase that will be converted back into the native language.
+ * @return {string} Phrase that has been translated into the native language.
  */
 function unpigPhrase (phrase) {
   var sentence = phrase.split(' ');
@@ -49,8 +51,8 @@ function unpigPhrase (phrase) {
 
 /**
  * Takes a word and converts it into pig latin
- * @param  [string] This is the word that will be converted
- * @return [string] Word that hass been converted into pig latin
+ * @param  {string} word This is the word that will be converted
+ * @return {string} Word that hass been converted into pig latin
  */
 function pigWord (word) {
   return word.slice(findFirstVowel(word), word.length) + '-' + word.slice( -word.length, findFirstVowel(word)) + 'ay';
@@ -58,8 +60,8 @@ function pigWord (word) {
 
 /**
  * Takes a word in pig latin and converts it into a human readable word
- * @param  [String] piggedWord that will be translated
- * @return [String] Translated word
+ * @param  {string} piggedWord Word that will be translated
+ * @return {string} Translated word
  */
 function unpigWord ( piggedWord ) {
   return piggedWord.slice( piggedWord.search('-') + 1, -2 ) + piggedWord.slice( 0, piggedWord.search('-'));
@@ -67,8 +69,8 @@ function unpigWord ( piggedWord ) {
 
 /**
  * Finds the first vowel in a word
- * @param  [sting] word
- * @return [int] position of the first vowel in the word
+ * @param  {string} word
+ * @return {number} position of the first vowel in the word
  */
 
 function findFirstVowel (word) {
