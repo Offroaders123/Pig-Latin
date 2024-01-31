@@ -4,11 +4,11 @@
  * @return Phrase that has been translated into pig latin
  */
 export function pigPhrase (phrase: string): string {
-  var sentence = phrase.split(' ');
-  var piggedPhrase = [];
+  const sentence = phrase.split(' ');
+  const piggedPhrase = [];
 
-  for (var i = 0; i <= sentence.length - 1; i++) {
-    piggedPhrase.push(pigWord(sentence[i]));
+  for (const word of sentence) {
+    piggedPhrase.push(pigWord(word));
   };
   return piggedPhrase.join(' ');
 }
@@ -19,11 +19,11 @@ export function pigPhrase (phrase: string): string {
  * @return Phrase that has been translated into the native language.
  */
 export function unpigPhrase (phrase: string): string {
-  var sentence = phrase.split(' ');
-  var unpiggedPhrase = [];
+  const sentence = phrase.split(' ');
+  const unpiggedPhrase = [];
 
-  for (var i = 0; i <= sentence.length - 1; i++) {
-    unpiggedPhrase.push(unpigWord(sentence[i]));
+  for (const word of sentence) {
+    unpiggedPhrase.push(unpigWord(word));
   };
   return unpiggedPhrase.join(' ');
 }
@@ -53,11 +53,11 @@ function unpigWord ( piggedWord: string ): string {
  */
 
 function findFirstVowel (word: string): number {
-  var vowels = ['a', 'e', 'i', 'o', 'u'];
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
 
-  for (var i = 0; i <= word.length - 1; i++) {
+  for (let i = 0; i <= word.length - 1; i++) {
 
-    if (vowels.indexOf(word[i]) !== -1 ) {
+    if (vowels.indexOf(word[i]!) !== -1 ) {
       return i;
     }
   }

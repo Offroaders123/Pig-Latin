@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "module": "None",
+    "module": "ESNext",
     "target": "ESNext",
-    // "isolatedModules": true,
+    "isolatedModules": true,
     "noEmit": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    // "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": true,
     "allowUnreachableCode": false,
-    // "noUnusedLocals": true,
+    "noUnusedLocals": true,
     "noUnusedParameters": true
   }
 }

@@ -1,15 +1,15 @@
 async function submitPigPhrase(): Promise<void> {
 
-  var input = (document.getElementById('pigInput') as HTMLTextAreaElement).value;
-  var translation = (document.getElementById('translation') as HTMLDivElement);
+  const input = document.querySelector<HTMLTextAreaElement>('#pigInput')!.value;
+  const translation = document.querySelector<HTMLDivElement>('#translation')!;
 
-  var header = document.createElement('h3');
-  var text = document.createElement('p');
+  // const header = document.createElement('h3');
+  const text = document.createElement('p');
 
   //clear previous translation from the DOM
-  if (translation.firstChild) translation.removeChild(translation.firstChild)
+  translation.firstChild?.remove()
 
   //Append newly translated phrase to the DOM
   text.innerHTML = (await import("./pigLatin.js")).pigPhrase(input);
-  translation.appendChild(text);
+  translation.append(text);
 }
