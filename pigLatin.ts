@@ -34,7 +34,10 @@ export function unpigPhrase(phrase: string): string {
  * @return Word that hass been converted into pig latin
  */
 function pigWord(word: string): string {
-  return `${word.slice(findFirstVowel(word), word.length)}-${word.slice(-word.length, findFirstVowel(word))}ay`;
+  const firstVowelIndex: number = findFirstVowelIndex(word);
+  const firstGroup: string = word.slice(-word.length, firstVowelIndex);
+  const secondGroup: string = word.slice(firstVowelIndex, word.length);
+  return `${secondGroup}-${firstGroup}ay`;
 }
 
 /**
@@ -43,15 +46,18 @@ function pigWord(word: string): string {
  * @return Translated word
  */
 function unpigWord(piggedWord: string): string {
-  return `${piggedWord.slice(piggedWord.search("-") + 1, -2)}${piggedWord.slice(0, piggedWord.search("-"))}`;
+  const dashIndex: number = piggedWord.search("-");
+  const secondGroup: string = piggedWord.slice(0, dashIndex);
+  const firstGroup: string = piggedWord.slice(dashIndex + 1, -2);
+  return `${firstGroup}${secondGroup}`;
 }
 
 /**
- * Finds the first vowel in a word
+ * Finds the index of the first vowel in a word
  * @param word
  * @return position of the first vowel in the word
  */
-function findFirstVowel(word: string): number {
+function findFirstVowelIndex(word: string): number {
   const vowels = ["a", "e", "i", "o", "u"];
 
   for (let i = 0; i <= word.length - 1; i++){
