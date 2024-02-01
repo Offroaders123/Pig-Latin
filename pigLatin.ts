@@ -35,8 +35,16 @@ export function unpigPhrase(phrase: string): string {
  */
 function pigWord(word: string): string {
   const firstVowelIndex: number = findVowelIndex(word);
-  const firstGroup: string = word.slice(0, firstVowelIndex);
-  const secondGroup: string = word.slice(firstVowelIndex, word.length);
+  let firstGroup: string = word.slice(0, firstVowelIndex);
+  const firstLetter: string = firstGroup[0] ?? "";
+  const isUpperCased: boolean = isUpperCase(firstLetter);
+  if (isUpperCased){
+    firstGroup = `${firstLetter.toLowerCase()}${firstGroup.slice(1)}`;
+  }
+  let secondGroup: string = word.slice(firstVowelIndex, word.length);
+  if (isUpperCased){
+    secondGroup = `${secondGroup[0]?.toUpperCase() ?? ""}${secondGroup.slice(1)}`;
+  }
   return `${secondGroup}-${firstGroup}ay`;
 }
 
@@ -47,8 +55,16 @@ function pigWord(word: string): string {
  */
 function unpigWord(piggedWord: string): string {
   const dashIndex: number = piggedWord.search("-");
-  const secondGroup: string = piggedWord.slice(0, dashIndex);
-  const firstGroup: string = piggedWord.slice(dashIndex + 1, -2);
+  let secondGroup: string = piggedWord.slice(0, dashIndex);
+  const firstLetter: string = secondGroup[0] ?? "";
+  const isUpperCased: boolean = isUpperCase(firstLetter);
+  if (isUpperCased){
+    secondGroup = `${firstLetter.toLowerCase()}${secondGroup.slice(1)}`;
+  }
+  let firstGroup: string = piggedWord.slice(dashIndex + 1, -2);
+  if (isUpperCased){
+    firstGroup = `${firstGroup[0]?.toUpperCase() ?? ""}${firstGroup.slice(1)}`;
+  }
   return `${firstGroup}${secondGroup}`;
 }
 
@@ -75,9 +91,9 @@ function isUpperCase(letter: string): boolean {
   return letter.toUpperCase() === letter;
 }
 
-const demo = "haaeg";
-console.log(demo[findVowelIndex(demo)]);
-console.log(demo[findVowelIndex(demo,false)]);
+// const demo = "haaeg";
+// console.log(demo[findVowelIndex(demo)]);
+// console.log(demo[findVowelIndex(demo,false)]);
 
 // console.log(pigPhrase("I built a pig latin translator program"));
 //

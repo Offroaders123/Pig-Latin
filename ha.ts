@@ -14,7 +14,8 @@ const demo: string[] = [
 ];
 const out = demo
   .map((entry): [string, string] => [entry, pigPhrase(entry)])
-  .map((entry): [string, string, string] => [...entry, unpigPhrase(entry[1])]);
+  .map((entry): [string, string, string] => [...entry, unpigPhrase(entry[1])])
+  .map((entry): [string, string, string, boolean] => [...entry, entry[0] === entry[2]]);
 
 for (const entry of out){
   console.log(entry);
