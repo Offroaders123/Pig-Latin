@@ -2,11 +2,11 @@ import { pigPhrase, unpigPhrase } from "./pigLatin.js";
 
 const demo: string[] = [
   "nice!",
-  "does this work with all of this?",
+  "Does this work with all of this?",
   "day",
   "pig latin",
-  "hello world",
-  "hi mom",
+  "Hello world",
+  "Hi mom",
   "Capital Letters, Do They Work Right?",
   "Pig Linter haha"
 ];

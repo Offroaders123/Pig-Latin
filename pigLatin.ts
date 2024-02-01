@@ -68,6 +68,10 @@ function findFirstVowelIndex(word: string): number {
   return word.length;
 }
 
+function isUpperCase(letter: string): boolean {
+  return letter.toUpperCase() === letter;
+}
+
 // console.log(pigPhrase("I built a pig latin translator program"));
 //
 // console.log(unpigPhrase("is-Thay ig-Pay atin-Lay ase-phray ill-way e-bay anslated-tray ack-bay into-ay e-thay ative-nay anguage-lay -asay -aay ing.-stray"));
