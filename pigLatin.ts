@@ -34,8 +34,8 @@ export function unpigPhrase(phrase: string): string {
  * @return Word that hass been converted into pig latin
  */
 function pigWord(word: string): string {
-  const firstVowelIndex: number = findFirstVowelIndex(word);
-  const firstGroup: string = word.slice(-word.length, firstVowelIndex);
+  const firstVowelIndex: number = findVowelIndex(word);
+  const firstGroup: string = word.slice(0, firstVowelIndex);
   const secondGroup: string = word.slice(firstVowelIndex, word.length);
   return `${secondGroup}-${firstGroup}ay`;
 }
@@ -52,25 +52,32 @@ function unpigWord(piggedWord: string): string {
   return `${firstGroup}${secondGroup}`;
 }
 
-/**
- * Finds the index of the first vowel in a word
- * @param word
- * @return position of the first vowel in the word
- */
-function findFirstVowelIndex(word: string): number {
-  const vowels = ["a", "e", "i", "o", "u"];
+const vowels = ["a", "e", "i", "o", "u"];
 
+/**
+ * Finds the index of the first or last vowel in a word
+ * @param word
+ * @param firstIndex
+ * @return position of the first or last vowel in the word
+ */
+function findVowelIndex(word: string, firstIndex: boolean = true): number {
   for (let i = 0; i <= word.length - 1; i++){
-    if (vowels.indexOf(word[i]!) !== -1){
-      return i;
+    const index: number = firstIndex ? i : word.length - i;
+    if (vowels.indexOf(word[index]!) !== -1){
+      return index;
     }
   }
-  return word.length;
+  const fallbackIndex: number = firstIndex ? word.length : 0;
+  return fallbackIndex;
 }
 
 function isUpperCase(letter: string): boolean {
   return letter.toUpperCase() === letter;
 }
+
+const demo = "haaeg";
+console.log(demo[findVowelIndex(demo)]);
+console.log(demo[findVowelIndex(demo,false)]);
 
 // console.log(pigPhrase("I built a pig latin translator program"));
 //

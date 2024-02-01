@@ -8,7 +8,9 @@ const demo: string[] = [
   "Hello world",
   "Hi mom",
   "Capital Letters, Do They Work Right?",
-  "Pig Linter haha"
+  "Pig Linter haha",
+  "ay",
+  ""
 ];
 const out = demo
   .map((entry): [string, string] => [entry, pigPhrase(entry)])
