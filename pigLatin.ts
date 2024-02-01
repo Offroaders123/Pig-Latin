@@ -34,7 +34,7 @@ export function unpigPhrase(phrase: string): string {
  * @return Word that hass been converted into pig latin
  */
 function pigWord(word: string): string {
-  return word.slice(findFirstVowel(word), word.length) + "-" + word.slice(-word.length, findFirstVowel(word)) + "ay";
+  return `${word.slice(findFirstVowel(word), word.length)}-${word.slice(-word.length, findFirstVowel(word))}ay`;
 }
 
 /**
@@ -43,7 +43,7 @@ function pigWord(word: string): string {
  * @return Translated word
  */
 function unpigWord(piggedWord: string): string {
-  return piggedWord.slice(piggedWord.search("-") + 1, -2) + piggedWord.slice(0, piggedWord.search("-"));
+  return `${piggedWord.slice(piggedWord.search("-") + 1, -2)}${piggedWord.slice(0, piggedWord.search("-"))}`;
 }
 
 /**
