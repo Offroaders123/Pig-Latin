@@ -28,6 +28,8 @@ export function unpigPhrase(phrase: string): string {
   return unpiggedPhrase.join(" ");
 }
 
+const separator = "\u200b";
+
 /**
  * Takes a word and converts it into pig latin
  * @param word This is the word that will be converted
@@ -38,7 +40,7 @@ function pigWord(word: string): string {
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   const firstGroup: string = word.slice(0, splitIndex);
   const secondGroup: string = word.slice(splitIndex, word.length);
-  const result: string = `${secondGroup}-${firstGroup}ay`
+  const result: string = `${secondGroup}${separator}${firstGroup}ay`
     .split("")
     .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
     .join("");
@@ -51,7 +53,7 @@ function pigWord(word: string): string {
  * @return Translated word
  */
 function unpigWord(word: string): string {
-  const splitIndex: number = word.search("-");
+  const splitIndex: number = word.search(separator);
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   const firstGroup: string = word.slice(0, splitIndex);
   const secondGroup: string = word.slice(splitIndex + 1, -2);
