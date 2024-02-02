@@ -36,16 +36,13 @@ export function unpigPhrase(phrase: string): string {
 function pigWord(word: string): string {
   const splitIndex: number = findVowelIndex(word);
   let firstGroup: string = word.slice(0, splitIndex);
-  const firstLetter: string = firstGroup[0] ?? "";
-  const isUpperCased: boolean = isUpperCase(firstLetter);
-  if (isUpperCased){
-    firstGroup = `${firstLetter.toLowerCase()}${firstGroup.slice(1)}`;
-  }
+  const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   let secondGroup: string = word.slice(splitIndex, word.length);
-  if (isUpperCased){
-    secondGroup = `${secondGroup[0]?.toUpperCase() ?? ""}${secondGroup.slice(1)}`;
-  }
-  return `${secondGroup}-${firstGroup}ay`;
+  const result: string = `${secondGroup}-${firstGroup}ay`
+    .split("")
+    .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
+    .join("");
+  return result;
 }
 
 /**
@@ -56,19 +53,16 @@ function pigWord(word: string): string {
 function unpigWord(word: string): string {
   const splitIndex: number = word.search("-");
   let firstGroup: string = word.slice(0, splitIndex);
-  const firstLetter: string = firstGroup[0] ?? "";
-  const isUpperCased: boolean = isUpperCase(firstLetter);
-  if (isUpperCased){
-    firstGroup = `${firstLetter.toLowerCase()}${firstGroup.slice(1)}`;
-  }
+  const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   let secondGroup: string = word.slice(splitIndex + 1, -2);
-  if (isUpperCased){
-    secondGroup = `${secondGroup[0]?.toUpperCase() ?? ""}${secondGroup.slice(1)}`;
-  }
-  return `${secondGroup}${firstGroup}`;
+  const result: string = `${secondGroup}${firstGroup}`
+    .split("")
+    .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
+    .join("");
+  return result;
 }
 
-const vowels = ["a", "e", "i", "o", "u"];
+const vowels = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"];
 
 /**
  * Finds the index of the first or last vowel in a word
@@ -88,7 +82,7 @@ function findVowelIndex(word: string, firstIndex: boolean = true): number {
 }
 
 function isUpperCase(letter: string): boolean {
-  return letter.toUpperCase() === letter;
+  return /[a-z]/i.test(letter) && letter.toUpperCase() === letter;
 }
 
 // const demo = "haaeg";

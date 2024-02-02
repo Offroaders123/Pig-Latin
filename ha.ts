@@ -9,6 +9,7 @@ const demo: string[] = [
   "Hi mom",
   "Capital Letters, Do They Work Right?",
   "Pig Linter haha",
+  "WHAT ABOUT YELLING??",
   "ay",
   ""
 ];
