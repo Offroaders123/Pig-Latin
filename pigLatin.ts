@@ -3,12 +3,12 @@
  * @param phrase Phrase that will be converted into pig latin.
  * @return Phrase that has been translated into pig latin
  */
-export function pigPhrase(phrase: string): string {
+export function pigPhrase(phrase: string, delimiter: Delimiter = Delimiter.HYPHEN): string {
   const sentence = phrase.split(" ");
   const piggedPhrase: string[] = [];
 
   for (const word of sentence){
-    piggedPhrase.push(pigWord(word));
+    piggedPhrase.push(pigWord(word, delimiter));
   }
   return piggedPhrase.join(" ");
 }
@@ -18,29 +18,34 @@ export function pigPhrase(phrase: string): string {
  * @param phrase Pig Latin phrase that will be converted back into the native language.
  * @return Phrase that has been translated into the native language.
  */
-export function unpigPhrase(phrase: string): string {
+export function unpigPhrase(phrase: string, delimiter: Delimiter = Delimiter.HYPHEN): string {
   const sentence = phrase.split(" ");
   const unpiggedPhrase: string[] = [];
 
   for (const word of sentence){
-    unpiggedPhrase.push(unpigWord(word));
+    unpiggedPhrase.push(unpigWord(word, delimiter));
   }
   return unpiggedPhrase.join(" ");
 }
 
-const separator = "\0";
+export enum Delimiter {
+  HYPHEN = "-",
+  NONE = "",
+  NULL = "\0",
+  ZERO_WIDTH = "\u200b"
+}
 
 /**
  * Takes a word and converts it into pig latin
  * @param word This is the word that will be converted
  * @return Word that hass been converted into pig latin
  */
-function pigWord(word: string): string {
+function pigWord(word: string, delimiter: Delimiter): string {
   const splitIndex: number = findVowelIndex(word);
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   const firstGroup: string = word.slice(0, splitIndex);
   const secondGroup: string = word.slice(splitIndex, word.length);
-  const result: string = `${secondGroup}${separator}${firstGroup}ay`
+  const result: string = `${secondGroup}${delimiter}${firstGroup}ay`
     .split("")
     .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
     .join("");
@@ -52,8 +57,8 @@ function pigWord(word: string): string {
  * @param word Word that will be translated
  * @return Translated word
  */
-function unpigWord(word: string): string {
-  const splitIndex: number = word.search(separator);
+function unpigWord(word: string, delimiter: Delimiter): string {
+  const splitIndex: number = word.search(delimiter);
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   const firstGroup: string = word.slice(0, splitIndex);
   const secondGroup: string = word.slice(splitIndex + 1, -2);
