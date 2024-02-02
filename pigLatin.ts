@@ -28,7 +28,7 @@ export function unpigPhrase(phrase: string): string {
   return unpiggedPhrase.join(" ");
 }
 
-const separator = "\u200b";
+const separator = "\0";
 
 /**
  * Takes a word and converts it into pig latin
