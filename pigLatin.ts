@@ -35,9 +35,9 @@ export function unpigPhrase(phrase: string): string {
  */
 function pigWord(word: string): string {
   const splitIndex: number = findVowelIndex(word);
-  let firstGroup: string = word.slice(0, splitIndex);
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
-  let secondGroup: string = word.slice(splitIndex, word.length);
+  const firstGroup: string = word.slice(0, splitIndex);
+  const secondGroup: string = word.slice(splitIndex, word.length);
   const result: string = `${secondGroup}-${firstGroup}ay`
     .split("")
     .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
@@ -52,9 +52,9 @@ function pigWord(word: string): string {
  */
 function unpigWord(word: string): string {
   const splitIndex: number = word.search("-");
-  let firstGroup: string = word.slice(0, splitIndex);
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
-  let secondGroup: string = word.slice(splitIndex + 1, -2);
+  const firstGroup: string = word.slice(0, splitIndex);
+  const secondGroup: string = word.slice(splitIndex + 1, -2);
   const result: string = `${secondGroup}${firstGroup}`
     .split("")
     .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
@@ -62,7 +62,7 @@ function unpigWord(word: string): string {
   return result;
 }
 
-const vowels = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"];
+const vowels = /[aeiou]/i;
 
 /**
  * Finds the index of the first or last vowel in a word
@@ -73,7 +73,7 @@ const vowels = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"];
 function findVowelIndex(word: string, firstIndex: boolean = true): number {
   for (let i = 0; i <= word.length - 1; i++){
     const index: number = firstIndex ? i : word.length - i;
-    if (vowels.indexOf(word[index]!) !== -1){
+    if (vowels.test(word[index]!)){
       return index;
     }
   }
@@ -82,7 +82,7 @@ function findVowelIndex(word: string, firstIndex: boolean = true): number {
 }
 
 function isUpperCase(letter: string): boolean {
-  return /[a-z]/i.test(letter) && letter.toUpperCase() === letter;
+  return /\w/.test(letter) && letter.toUpperCase() === letter;
 }
 
 // const demo = "haaeg";
