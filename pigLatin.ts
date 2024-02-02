@@ -34,14 +34,14 @@ export function unpigPhrase(phrase: string): string {
  * @return Word that hass been converted into pig latin
  */
 function pigWord(word: string): string {
-  const firstVowelIndex: number = findVowelIndex(word);
-  let firstGroup: string = word.slice(0, firstVowelIndex);
+  const splitIndex: number = findVowelIndex(word);
+  let firstGroup: string = word.slice(0, splitIndex);
   const firstLetter: string = firstGroup[0] ?? "";
   const isUpperCased: boolean = isUpperCase(firstLetter);
   if (isUpperCased){
     firstGroup = `${firstLetter.toLowerCase()}${firstGroup.slice(1)}`;
   }
-  let secondGroup: string = word.slice(firstVowelIndex, word.length);
+  let secondGroup: string = word.slice(splitIndex, word.length);
   if (isUpperCased){
     secondGroup = `${secondGroup[0]?.toUpperCase() ?? ""}${secondGroup.slice(1)}`;
   }
@@ -50,22 +50,22 @@ function pigWord(word: string): string {
 
 /**
  * Takes a word in pig latin and converts it into a human readable word
- * @param piggedWord Word that will be translated
+ * @param word Word that will be translated
  * @return Translated word
  */
-function unpigWord(piggedWord: string): string {
-  const dashIndex: number = piggedWord.search("-");
-  let secondGroup: string = piggedWord.slice(0, dashIndex);
-  const firstLetter: string = secondGroup[0] ?? "";
+function unpigWord(word: string): string {
+  const splitIndex: number = word.search("-");
+  let firstGroup: string = word.slice(0, splitIndex);
+  const firstLetter: string = firstGroup[0] ?? "";
   const isUpperCased: boolean = isUpperCase(firstLetter);
   if (isUpperCased){
-    secondGroup = `${firstLetter.toLowerCase()}${secondGroup.slice(1)}`;
+    firstGroup = `${firstLetter.toLowerCase()}${firstGroup.slice(1)}`;
   }
-  let firstGroup: string = piggedWord.slice(dashIndex + 1, -2);
+  let secondGroup: string = word.slice(splitIndex + 1, -2);
   if (isUpperCased){
-    firstGroup = `${firstGroup[0]?.toUpperCase() ?? ""}${firstGroup.slice(1)}`;
+    secondGroup = `${secondGroup[0]?.toUpperCase() ?? ""}${secondGroup.slice(1)}`;
   }
-  return `${firstGroup}${secondGroup}`;
+  return `${secondGroup}${firstGroup}`;
 }
 
 const vowels = ["a", "e", "i", "o", "u"];
