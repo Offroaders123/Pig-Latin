@@ -29,6 +29,11 @@ export enum Delimiter {
   ZERO_WIDTH = "\u200b"
 }
 
+enum WordSuffix {
+  AY = "ay",
+  YAY = "yay"
+}
+
 /**
  * Takes a word and converts it into pig latin
  * @param word This is the word that will be converted
@@ -39,10 +44,14 @@ function pigWord(word: string, delimiter: Delimiter): string {
   const upperCaseMap: boolean[] = word.split("").map(letter => isUpperCase(letter));
   const firstGroup: string = word.slice(0, splitIndex);
   const secondGroup: string = word.slice(splitIndex, word.length);
-  const result: string = `${secondGroup}${delimiter}${firstGroup}ay`
+  console.log(word);
+  console.log(splitIndex, [firstGroup, secondGroup]);
+  const suffix: WordSuffix = vowels.test(word[0] ?? "") ? WordSuffix.AY : WordSuffix.YAY;
+  const result: string = `${secondGroup}${delimiter}${firstGroup}${suffix}`
     .split("")
     .map((letter, i) => upperCaseMap[i] ? letter.toUpperCase() : letter.toLowerCase())
     .join("");
+  console.log(result, "\n");
   return result;
 }
 

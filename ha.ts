@@ -1,17 +1,17 @@
 import { pigPhrase, unpigPhrase } from "./pigLatin.js";
 
 const demo: string[] = [
-  "nice!",
-  "Does this work with all of this?",
-  "day",
-  "pig latin",
-  "Hello world",
-  "Hi mom",
-  "Capital Letters, Do They Work Right?",
-  "Pig Linter haha",
+  // "nice!",
+  // "Does this work with all of this?",
+  // "day",
+  // "pig latin",
+  // "Hello world",
+  // "Hi mom",
+  // "Capital Letters, Do They Work Right?",
+  // "Pig Linter haha",
   "WHAT ABOUT YELLING??",
-  "ay",
-  ""
+  // "ay",
+  // ""
 ];
 const out = demo
   .map((entry): [string, string] => [entry, pigPhrase(entry)])
