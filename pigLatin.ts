@@ -4,13 +4,10 @@
  * @return Phrase that has been translated into pig latin
  */
 export function pigPhrase(phrase: string, delimiter: Delimiter = Delimiter.HYPHEN): string {
-  const sentence = phrase.split(" ");
-  const piggedPhrase: string[] = [];
-
-  for (const word of sentence){
-    piggedPhrase.push(pigWord(word, delimiter));
-  }
-  return piggedPhrase.join(" ");
+  return phrase
+    .split(" ")
+    .map(word => pigWord(word, delimiter))
+    .join(" ");
 }
 
 /**
@@ -19,13 +16,10 @@ export function pigPhrase(phrase: string, delimiter: Delimiter = Delimiter.HYPHE
  * @return Phrase that has been translated into the native language.
  */
 export function unpigPhrase(phrase: string, delimiter: Delimiter = Delimiter.HYPHEN): string {
-  const sentence = phrase.split(" ");
-  const unpiggedPhrase: string[] = [];
-
-  for (const word of sentence){
-    unpiggedPhrase.push(unpigWord(word, delimiter));
-  }
-  return unpiggedPhrase.join(" ");
+  return phrase
+    .split(" ")
+    .map(word => unpigWord(word, delimiter))
+    .join(" ");
 }
 
 export enum Delimiter {
